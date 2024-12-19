@@ -1,0 +1,25 @@
+name: Self-hosted Runner Workflow
+
+on:   # トリガー
+  push:
+    branches:
+      - main
+
+jobs:
+  run-sample:
+    runs-on: self-hosted  # Self-hosted Runnerを指定
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # リポジトリのコードを取得
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3 # Node.jsのバージョンをセットアップする
+        with:
+          node-version: 16  
+
+      - name: Install dependencies
+        run: npm install   # 指定したコマンド（ここではnpm install）を実行
+  
+      - name: Run the app
+        run: npm start    # 指定したコマンド（ここではnpm start）を実行
